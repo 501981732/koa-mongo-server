@@ -6,7 +6,7 @@ class User {
     }
     async userList(ctx, next) {
         try {
-            // const user = await user.findById(ctx.params.id, '-password')
+            // const user = await user.findById(ctx.params.id)
             const user = await '王猛'
             if (!user) {
                 ctx.throw(404)
