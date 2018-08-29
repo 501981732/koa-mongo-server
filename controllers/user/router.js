@@ -32,4 +32,11 @@ export default [
             userController.addUser
         ]
     },
+    {
+        method: 'get',
+        route: '/demo',
+        handlers: [
+            userController.demo
+        ]
+    },
 ]

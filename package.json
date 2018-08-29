@@ -4,7 +4,8 @@
   "description": "koa-mongo-server",
   "scripts": {
     "dev": " supervisor index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rmpkg": "sudo rm -rf /node_modules"
   },
   "keywords": [
     "Koa",

@@ -17,7 +17,9 @@ export default function initModules(app) {
             const routes = router.default
             const baseUrl = router.baseUrl
             const instance = new Router({ prefix: baseUrl })
+
             console.log(router)
+            
             routes.forEach((config) => {
                 const {
                     method = '',
