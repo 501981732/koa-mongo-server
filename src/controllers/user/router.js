@@ -33,7 +33,7 @@ export default [
         ]
     },
     {
-        method: 'get',
+        method: 'GET',
         route: '/demo',
         handlers: [
             userController.demo

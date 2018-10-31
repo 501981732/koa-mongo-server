@@ -7,7 +7,7 @@ const User = new mongoose.Schema({
 	id: Number,
 	create_time: { type: Date, default: Date.now },
 	admin: {type: String, default: ''},
-	status: Number,  //1:普通管理、 2:超级管理员
+	status: {type:Number,default: 1},  //1:普通管理、 2:超级管理员
 })
 
 User.index({id: 1});
