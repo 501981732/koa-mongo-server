@@ -102,9 +102,6 @@ npm run rmpkg   // 删除node_modules
 ```
 
 
-```
-$ git clone git@github.com:ruanyf/koa-demos.git
-```
 
 ## 项目生成器
 
