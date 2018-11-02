@@ -52,7 +52,7 @@ npm run rmpkg   // 删除node_modules
 
 ```
 
-##项目目录结构
+## 项目目录结构
 
 ```
 .
