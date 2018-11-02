@@ -1,6 +1,6 @@
 import Koa from 'koa'
 import path from 'path'
-import '../src/mongodb/' // 数据库
+import '../src/db/' // 数据库
 import config from '../config'
 import bodyParser from 'koa-bodyparser' //Request Body解析器
 import controllerInit from '../src/controllers/' // 路由配置

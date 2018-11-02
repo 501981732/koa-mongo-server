@@ -31,7 +31,7 @@ class Image extends Canvas {
         let bgColor = ctx.params.bg ? `${ctx.params.bg}` : `#e83632`;
         console.log(sizeAry)
         let imgBuffer = this.getCanvas({ width: Number(sizeAry[0]), height: Number(sizeAry[1]), shape, bgColor })
-        ctx.type="image/jpg"
+        // ctx.type="image/jpg"
         ctx.status = 200
         ctx.body = imgBuffer
         next && next()
