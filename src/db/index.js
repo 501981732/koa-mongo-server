@@ -29,3 +29,13 @@ db.on('close', function() {
 });
 
 export default db;
+
+
+
+// import mysql from 'mysql'
+// import config from './../../config/'
+// //创建连接池
+// const db = mysql.createPool({host:config.sql_host,user:config.sql_user,password:config.sql_password,database:config.database})
+
+
+// export default db;

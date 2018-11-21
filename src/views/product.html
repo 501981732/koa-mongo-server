@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="alert alert-success alert-dismissable alert-ok" hidden>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                &times;
+            </button>
+            成功！很好地完成了提交。
+        </div>
+        <h1>product</h1>
+        <div class="row">
+            <div class="col-md-10">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: center;">商品名称</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="name" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: center;">商品价格</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="price" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: center;">商品数量</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="number" type="text" value="">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary submit-product">添加商品</button>
+                </form>
+                </p>
+            </div>
+        </div>
+        <h2>product 表单</h2>
+        <div class="table-responsive">
+            <table class="table">
+                <caption>表格</caption>
+                <thead>
+                    <th>商品名称</th>
+                    <th>商品价格</th>
+                    <th>商品数量</th>
+                    <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody class="tb">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                    模态框（Modal）标题
+                </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" style="text-align: center;">商品名称</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="name_2" type="text" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" style="text-align: center;">商品价格</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="price_2" type="text" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" style="text-align: center;">商品数量</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="number_2" type="text" value="">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        关闭
+                    </button>
+                    <button type="button" class="btn btn-primary btn_update">
+                        提交更改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+$(function() {
+    let UPDATA_ID = ''
+    getList()
+    // 删除商品
+    $(document).on('click', '.btn-delete', function() {
+        let id = $(this).data('id')
+        $.ajax({
+            url: `/product/${id}`,
+            type: 'DELETE',
+            success: function(res) {
+                console.log(res)
+                if (res.status == 1) {
+                    alert(res.message)
+                    getList()
+                } else {
+                    alert(res.message)
+                }
+            },
+            error: function(res) {
+                console.log(res)
+            }
+
+        });
+    })
+    //  显示弹框
+    $(document).on('click', '.show-m', function() {
+        let name = $(this).data('name'),
+            price = $(this).data('price'),
+            number = $(this).data('number');
+            UPDATA_ID = $(this).data('id')
+        $('#name_2').val(name)
+        $('#price_2').val(price)
+        $('#number_2').val(number)
+    })
+    //  修改商品
+    $(document).on('click', '.btn_update', function() {
+        let query = {
+            name: $('#name_2').val(),
+            price: $('#price_2').val(),
+            number: $('#number_2').val()
+        }
+        update(UPDATA_ID, query)
+    })
+    //  添加商品
+    $('.submit-product').click(function(e) {
+        e.preventDefault()
+        $.ajax({
+            url: "/product",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                name: $('#name').val(),
+                price: $('#price').val(),
+                number: $('#number').val(),
+            },
+            success: function(res) {
+                if (res.status == 1) {
+                    getList()
+                } else {
+                    alert(res.message)
+                }
+            },
+            error: function(res) {
+                console.log(res)
+            }
+
+        });
+    })
+
+    function update(id, query) {
+        $.ajax({
+            url: `/product/${id}`,
+            type: 'PUT',
+            dataType: 'json',
+            data: query,
+            success: function(res) {
+                if (res.status == 1) {
+                    getList()
+                    $('#myModal').modal('hide')
+                    $('.alert-ok').hide()
+                } else {
+                    console.log(res)
+                }
+            },
+            error: function(res) {
+                console.log(res)
+            }
+
+        });
+    }
+    // 获取商品
+    function getList() {
+        $.ajax({
+            url: "/product",
+            type: 'GET',
+            dataType: 'json',
+            success: function(res) {
+                if (res.status == 1) {
+                    let { products } = res
+                    let html = ''
+                    products.forEach(item => {
+                        html += `<tr>
+                        <th>${item.name}</th>
+                        <th>${item.price}</th>
+                        <th>${item.number}</th>
+                        <th><button type="button" class="btn btn-danger btn-sm btn-delete" data-name=${item.name} data-price=${item.price} data-number=${item.number} data-id=${item._id}>删除</button><button type="button" class="btn btn-warning btn-sm show-m" data-toggle="modal" data-target="#myModal" data-name=${item.name} data-price=${item.price} data-number=${item.number} data-id=${item._id}>修改</button></th>
+                    </tr>`
+                    })
+                    $('.tb').html()
+                    $('.tb').html(html)
+                }
+            },
+        });
+    }
+
+})
+</script>
+
+</html>

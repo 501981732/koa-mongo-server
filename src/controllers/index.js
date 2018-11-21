@@ -19,16 +19,14 @@ export default function initModules(app) {
             const instance = new Router({ prefix: baseUrl })
 
             console.log(router)
-            
+
             routes.forEach((config) => {
                 const {
                     method = '',
                         route = '',
                         handlers = []
                 } = config
-
                 const lastHandler = handlers.pop()
-
                 instance[method.toLowerCase()](route, ...handlers, async function(ctx) {
                     return await lastHandler(ctx)
                 })

@@ -87,18 +87,18 @@ npm run rmpkg   // 删除node_modules
 │   │   ├── Base.js                             // 通用类方法
 │   │   └── Canvas.js                           // canvas类
 │   ├── views                                   // 视图层
-│   │   ├── index.html                          // 
-│   │   └── user.html                           // 
+│   │   ├── index.html                          //
+│   │   └── user.html                           //
 ├── test                                        // 测试文件
-│   └── index.spec.js                           
-├── .babelrc   
-├── Dockerfile                                    
-├── .gitignore                                   
-├── .gulpfile                                   
-├── .index                                     
-├── package.json                                    
-├── package-lock.json  
-└── README.md                                  
+│   └── index.spec.js
+├── .babelrc
+├── Dockerfile
+├── .gitignore
+├── .gulpfile
+├── .index
+├── package.json
+├── package-lock.json
+└── README.md
 ```
 
 

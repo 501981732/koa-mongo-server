@@ -10,8 +10,9 @@ import error from '../src/middleware/error.js'
 import serve from 'koa-static' // 静态文件部署
 import chalk from 'chalk' //颜色插件
 import Logger from 'mini-logger' //日志
-import render from 'koa-swig'
-import co from 'co'
+// import render from 'koa-swig'
+import views from 'koa-views'
+// import co from 'co'
 
 const app = new Koa()
 
@@ -31,6 +32,12 @@ app.use(bodyParser())
 app.use(error())
 app.use(log())
 
+// 静态资源部署
+app.use(serve(path.join( __dirname,  '../src/views/')))
+
+// 模板引擎
+app.use(views(path.join( __dirname,  '../src/views/')))
+
 controllerInit(app)
 
 const logger = Logger({
@@ -40,9 +47,7 @@ const logger = Logger({
 
 logger.error(new Error('error'))
 
-app.use(serve(
-	 path.join( __dirname,  '../src/views/')
-))
+
 
 
 

@@ -13,6 +13,16 @@
         <input type="text" name="age" id="age">
         <input type="submit" id='btn' value="Submit" />
     </form>
+    <h3>图片生成器</h3>
+    <form >
+        <label for="width">width: </label><input type="number" step='10' min='10' name="width" id="width"> <br><br>
+        <label for="height">height: </label><input type="number" step='10' min='10' name="height" id="height"> <br><br>
+        <label for="shape">shape: </label><input type="text" name="shape" id="shape"> <br><br>
+        <label for="color">color: </label><input type="text" name="color" id="color"><br><br>
+        <input type="button" id='imgbtn' value="button" />
+    </form>
+
+    <img src="" alt="" id="img">
 </body>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
 <script>
@@ -33,6 +43,10 @@ $(function() {
             },
 
         });
+    })
+    $('#imgbtn').click(function(e) {
+        e.preventDefault()
+        $('#img').attr('src',`/image/${$('#width').val()}*${$('#height').val()}/${$('#shape').val()}/${$('#color').val()}`)
     })
 })
 </script>

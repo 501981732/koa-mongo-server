@@ -10,20 +10,22 @@ import Base from './../../prototype/base.js'
  * @class
  * @extends Base
  */
+
 class User extends Base{
     /**
      * Create a user
      * author   wm
      * @DateTime 2018-10-31
-     *      
+     *
      */
     constructor(args) {
-        super(args)        
+        super(args)
         this.baseUrl = '/user'
         this.demo.bind(this)
     }
     async index(ctx, next) {
-        ctx.body = 'index'
+        // ctx.body = 'index'
+        await ctx.render('index',{})
         next && next()
     }
     /**
